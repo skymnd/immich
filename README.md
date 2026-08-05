@@ -13,6 +13,7 @@ I've mostly used the recommended environment variables
 from when I first set up Immich, but I did add one
 to enable Prometheus and updated the ports in the
 docker-compose file to reflect that.
+I also added a docker volume to mount the NAS drive.
 
 ## Media Storage
 
@@ -21,8 +22,4 @@ NAS drive rather than on the VM.
 
 ## Backup
 
-I've created a short script being run by a cron job
-to sync the library on the NAS drive with S3 Glacier.
-Note that S3 Glacier will charge for retrieval and for 
-deleting assets that are less than 12 months old, so
-this is purely a disaster recovery solution.
+I'm backing up the NAS drive to S3 Glacier.

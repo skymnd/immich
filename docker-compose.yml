@@ -16,8 +16,7 @@ services:
     #   file: hwaccel.transcoding.yml
     #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
-      # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
-      - ${UPLOAD_LOCATION}:/usr/src/app/upload
+      - immich_data:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
@@ -73,3 +72,9 @@ services:
 
 volumes:
   model-cache:
+  immich_data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${TRUENAS_IP},nfsvers=4,nolock,soft,rw
+      device: ":${TRUENAS_SHARE_PATH}"
